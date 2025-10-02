@@ -7,9 +7,9 @@ namespace TradingCompanyDal.Concrete
 
         public class CustomerDal : ICustomerDal
         {
-            private readonly string _connectionString = "Data Source=Firefly;Initial Catalog=IMDB2025;Integrated Security=True;Trust Server Certificate=True";
+            private readonly string _connectionString = "Data Source=localhost;Initial Catalog=Software;Integrated Security=True;TrustServerCertificate=True";
 
-            public Customer Create(Customer customer)
+        public Customer Create(Customer customer)
             {
                 using SqlConnection connection = new SqlConnection(_connectionString);
                 connection.Open();

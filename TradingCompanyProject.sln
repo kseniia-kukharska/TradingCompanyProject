@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingCompanyDal", "Tradin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingCompanyDto", "TradingCompanyDto\TradingCompanyDto.csproj", "{751E6000-4138-42C6-9767-599AE772EC0E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingCompanyConsole", "TradingCompanyConsole\TradingCompanyConsole.csproj", "{BD135133-3EA1-4881-8692-3E90769E0FD6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{751E6000-4138-42C6-9767-599AE772EC0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{751E6000-4138-42C6-9767-599AE772EC0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{751E6000-4138-42C6-9767-599AE772EC0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD135133-3EA1-4881-8692-3E90769E0FD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD135133-3EA1-4881-8692-3E90769E0FD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD135133-3EA1-4881-8692-3E90769E0FD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD135133-3EA1-4881-8692-3E90769E0FD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

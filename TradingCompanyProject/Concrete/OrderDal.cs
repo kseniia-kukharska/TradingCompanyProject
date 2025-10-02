@@ -6,9 +6,9 @@ namespace TradingCompanyDal.Concrete
 {
         public class OrderDal : IOrderDal
         {
-            private readonly string _connectionString = "Data Source=Firefly;Initial Catalog=IMDB2025;Integrated Security=True;Trust Server Certificate=True";
+            private readonly string _connectionString = "Data Source=localhost;Initial Catalog=Software;Integrated Security=True;TrustServerCertificate=True";
 
-            public Order Create(Order order)
+        public Order Create(Order order)
             {
                 using SqlConnection connection = new SqlConnection(_connectionString);
                 connection.Open();

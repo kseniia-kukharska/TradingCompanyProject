@@ -6,8 +6,8 @@ namespace TradingCompanyDal.Concrete
 {
     public class ProductDal : IProductDal
     {
-        private readonly string _connectionString = "Data Source=Firefly;Initial Catalog=ShopDB;Integrated Security=True;Trust Server Certificate=True";
-
+        private readonly string _connectionString = "Data Source=localhost;Initial Catalog=Software;Integrated Security=True; TrustServerCertificate=True";
+        
         public Product Create(Product product)
         {
             using SqlConnection connection = new SqlConnection(_connectionString);
