@@ -15,10 +15,10 @@ namespace TradingCompanyDal.Concrete
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
-                command.CommandText = "INSERT INTO Statuses (StatusName) OUTPUT inserted.StatusId VALUES (@name)";
+                command.CommandText = "INSERT INTO Statuses (StatusName) OUTPUT inserted.StatusID VALUES (@name)";
                 command.Parameters.AddWithValue("@name", status.StatusName);
 
-                status.StatusId = (int)command.ExecuteScalar();
+                status.StatusID = (int)command.ExecuteScalar();
                 return status;
             }
 
@@ -36,28 +36,28 @@ namespace TradingCompanyDal.Concrete
                 {
                     statuses.Add(new Status
                     {
-                        StatusId = (int)reader["StatusId"],
+                        StatusID = (int)reader["StatusID"],
                         StatusName = (string)reader["StatusName"]
                     });
                 }
                 return statuses;
             }
 
-            public Status GetById(int statusId)
+            public Status GetByID(int statusID)
             {
                 using SqlConnection connection = new SqlConnection(_connectionString);
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
-                command.CommandText = "SELECT * FROM Statuses WHERE StatusId = @id";
-                command.Parameters.AddWithValue("@id", statusId);
+                command.CommandText = "SELECT * FROM Statuses WHERE StatusID = @id";
+                command.Parameters.AddWithValue("@id", statusID);
 
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
                 {
                     return new Status
                     {
-                        StatusId = (int)reader["StatusId"],
+                        StatusID = (int)reader["StatusID"],
                         StatusName = (string)reader["StatusName"]
                     };
                 }
@@ -70,22 +70,22 @@ namespace TradingCompanyDal.Concrete
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
-                command.CommandText = "UPDATE Statuses SET StatusName=@name WHERE StatusId=@id";
+                command.CommandText = "UPDATE Statuses SET StatusName=@name WHERE StatusID=@id";
                 command.Parameters.AddWithValue("@name", status.StatusName);
-                command.Parameters.AddWithValue("@id", status.StatusId);
+                command.Parameters.AddWithValue("@id", status.StatusID);
 
                 command.ExecuteNonQuery();
                 return status;
             }
 
-            public bool Delete(int statusId)
+            public bool Delete(int statusID)
             {
                 using SqlConnection connection = new SqlConnection(_connectionString);
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
-                command.CommandText = "DELETE FROM Statuses WHERE StatusId=@id";
-                command.Parameters.AddWithValue("@id", statusId);
+                command.CommandText = "DELETE FROM Statuses WHERE StatusID=@id";
+                command.Parameters.AddWithValue("@id", statusID);
 
                 int rows = command.ExecuteNonQuery();
                 return rows > 0;

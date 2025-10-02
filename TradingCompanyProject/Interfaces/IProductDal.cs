@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TradingCompanyDto;
+﻿using TradingCompanyDto;
 
 namespace TradingCompanyDal.Interfaces
 {
@@ -11,9 +6,9 @@ namespace TradingCompanyDal.Interfaces
     {
         Product Create(Product product);
         List<Product> GetAll();
-        Product GetById(int productId);
+        Product GetByID(int productID);
         Product Update(Product product);
-        bool Delete(int productId);
+        bool Delete(int productID);
     }
      
 }

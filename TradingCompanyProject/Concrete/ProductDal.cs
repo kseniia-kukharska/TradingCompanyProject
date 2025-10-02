@@ -46,14 +46,14 @@ namespace TradingCompanyDal.Concrete
             return products;
         }
 
-        public Product GetById(int productId)
+        public Product GetByID(int productID)
         {
             using SqlConnection connection = new SqlConnection(_connectionString);
             connection.Open();
 
             SqlCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM Products WHERE ProductID = @id";
-            command.Parameters.AddWithValue("@id", productId);
+            command.Parameters.AddWithValue("@id", productID);
 
             SqlDataReader reader = command.ExecuteReader();
             if (reader.Read())
@@ -85,14 +85,14 @@ namespace TradingCompanyDal.Concrete
             return product;
         }
 
-        public bool Delete(int productId)
+        public bool Delete(int productID)
         {
             using SqlConnection connection = new SqlConnection(_connectionString);
             connection.Open();
 
             SqlCommand command = connection.CreateCommand();
             command.CommandText = "DELETE FROM Products WHERE ProductID=@id";
-            command.Parameters.AddWithValue("@id", productId);
+            command.Parameters.AddWithValue("@id", productID);
 
             int rows = command.ExecuteNonQuery();
             return rows > 0;
