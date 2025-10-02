@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35818.85 d17.13
+VisualStudioVersion = 17.13.35818.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingCompanyProject", "TradingCompanyProject\TradingCompanyProject.csproj", "{349BA14F-0752-42CA-909A-EA7AC12B1B51}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingCompanyDal", "TradingCompanyProject\TradingCompanyDal.csproj", "{349BA14F-0752-42CA-909A-EA7AC12B1B51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingCompanyDto", "TradingCompanyDto\TradingCompanyDto.csproj", "{751E6000-4138-42C6-9767-599AE772EC0E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{349BA14F-0752-42CA-909A-EA7AC12B1B51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{349BA14F-0752-42CA-909A-EA7AC12B1B51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{349BA14F-0752-42CA-909A-EA7AC12B1B51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{751E6000-4138-42C6-9767-599AE772EC0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{751E6000-4138-42C6-9767-599AE772EC0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{751E6000-4138-42C6-9767-599AE772EC0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{751E6000-4138-42C6-9767-599AE772EC0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
