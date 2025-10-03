@@ -11,9 +11,9 @@ namespace TradingCompanyDal.Interfaces
     {
         OrderDetail Create(OrderDetail orderDetail);
         List<OrderDetail> GetAll();
-        OrderDetail GetByID(int orderDetailID);
+        OrderDetail GetById(int orderDetailId);
         OrderDetail Update(OrderDetail orderDetail);
-        bool Delete(int orderDetailID);
+        bool Delete(int orderDetailId);
 
     }
 }

@@ -51,7 +51,7 @@
                 //Console.WriteLine("\n---");
                 Console.WriteLine("Choose option:\n1. Get all Products;");
                 Console.WriteLine("2. Insert a Product;");
-                Console.WriteLine("3. Get a Product by ID;");
+                Console.WriteLine("3. Get a Product by Id;");
                 Console.WriteLine("4. Update a Product;");
                 Console.WriteLine("5. Delete a Product;");
                 Console.WriteLine("0. Quit.");
@@ -67,7 +67,7 @@
         {
             if (product != null)
             {
-                Console.WriteLine($"\tID: {product.ProductID}, Name: {product.Name}, Price: {product.Price}, Amount: {product.Amount}");
+                Console.WriteLine($"\tId: {product.ProductId}, Name: {product.Name}, Price: {product.Price}, Amount: {product.Amount}");
             }
             else
             {
@@ -149,17 +149,17 @@
         {
             try
             {
-                Console.Write("Enter Product ID: ");
+                Console.Write("Enter Product Id: ");
                 if (!int.TryParse(Console.ReadLine(), out int id))
                 {
-                    Console.WriteLine("Invalid ID format.");
+                    Console.WriteLine("Invalid Id format.");
                     return;
                 }
 
                 var dal = new ProductDal();
-                var product = dal.GetByID(id);
+                var product = dal.GetById(id);
 
-                Console.Write($"Product with ID {id}: ");
+                Console.Write($"Product with Id {id}: ");
                 PrintProduct(product);
             }
             catch (Exception ex)
@@ -172,19 +172,19 @@
         {
             try
             {
-                Console.Write("Enter Product ID: ");
+                Console.Write("Enter Product Id: ");
                 if (!int.TryParse(Console.ReadLine(), out int id))
                 {
-                    Console.WriteLine("Invalid ID format. Update cancelled.");
+                    Console.WriteLine("Invalid Id format. Update cancelled.");
                     return;
                 }
 
                 var dal = new ProductDal();
-                var existingProduct = dal.GetByID(id);
+                var existingProduct = dal.GetById(id);
 
                 if (existingProduct == null)
                 {
-                    Console.WriteLine($"Product with ID {id} not found.");
+                    Console.WriteLine($"Product with Id {id} not found.");
                     return;
                 }
 
@@ -228,10 +228,10 @@
         {
             try
             {
-                Console.Write("Enter Product ID: ");
+                Console.Write("Enter Product Id: ");
                 if (!int.TryParse(Console.ReadLine(), out int id))
                 {
-                    Console.WriteLine("Invalid ID format. Deletion cancelled.");
+                    Console.WriteLine("Invalid Id format. Deletion cancelled.");
                     return;
                 }
 
@@ -240,11 +240,11 @@
 
                 if (success)
                 {
-                    Console.WriteLine($"Successfully deleted Product with ID {id}.");
+                    Console.WriteLine($"Successfully deleted Product with Id {id}.");
                 }
                 else
                 {
-                    Console.WriteLine($"Product with ID {id} not found or could not be deleted.");
+                    Console.WriteLine($"Product with Id {id} not found or could not be deleted.");
                 }
             }
             catch (Exception ex)

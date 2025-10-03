@@ -9,7 +9,7 @@ namespace TradingCompanyDalef.Models;
 public partial class Customer
 {
     [Key]
-    [Column("CustomerID")]
+    [Column("CustomerId")]
     public int CustomerId { get; set; }
 
     [StringLength(50)]

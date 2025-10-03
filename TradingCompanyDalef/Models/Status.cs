@@ -9,7 +9,7 @@ namespace TradingCompanyDalef.Models;
 public partial class Status
 {
     [Key]
-    [Column("StatusID")]
+    [Column("StatusId")]
     public int StatusId { get; set; }
 
     [StringLength(50)]

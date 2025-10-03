@@ -9,13 +9,13 @@ namespace TradingCompanyDalef.Models;
 public partial class OrderDetail
 {
     [Key]
-    [Column("OrderDetailID")]
+    [Column("OrderDetailId")]
     public int OrderDetailId { get; set; }
 
-    [Column("OrderID")]
+    [Column("OrderId")]
     public int OrderId { get; set; }
 
-    [Column("ProductID")]
+    [Column("ProductId")]
     public int ProductId { get; set; }
 
     public int Quantity { get; set; }

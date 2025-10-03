@@ -11,8 +11,8 @@ namespace TradingCompanyDal.Interfaces
     {
         Status Create(Status status);
         List<Status> GetAll();
-        Status GetByID(int statusID);
+        Status GetById(int statusId);
         Status Update(Status status);
-        bool Delete(int statusID);
+        bool Delete(int statusId);
     }
 }

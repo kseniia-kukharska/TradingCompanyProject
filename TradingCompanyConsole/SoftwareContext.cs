@@ -33,16 +33,16 @@ public partial class SoftwareContext : DbContext
     {
         modelBuilder.Entity<Customer>(entity =>
         {
-            entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
+            entity.Property(e => e.CustomerId).HasColumnName("CustomerId");
             entity.Property(e => e.Name).HasMaxLength(50);
             entity.Property(e => e.Phone).HasMaxLength(25);
         });
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.Property(e => e.OrderId).HasColumnName("OrderID");
-            entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
-            entity.Property(e => e.StatusId).HasColumnName("StatusID");
+            entity.Property(e => e.OrderId).HasColumnName("OrderId");
+            entity.Property(e => e.CustomerId).HasColumnName("CustomerId");
+            entity.Property(e => e.StatusId).HasColumnName("StatusId");
             entity.Property(e => e.TotalAmount).HasColumnType("decimal(9, 2)");
 
             entity.HasOne(d => d.Customer).WithMany(p => p.Orders)
@@ -60,9 +60,9 @@ public partial class SoftwareContext : DbContext
         {
             entity.Property(e => e.OrderDetailId)
                 .ValueGeneratedOnAdd()
-                .HasColumnName("OrderDetailID");
-            entity.Property(e => e.OrderId).HasColumnName("OrderID");
-            entity.Property(e => e.ProductId).HasColumnName("ProductID");
+                .HasColumnName("OrderDetailId");
+            entity.Property(e => e.OrderId).HasColumnName("OrderId");
+            entity.Property(e => e.ProductId).HasColumnName("ProductId");
 
             entity.HasOne(d => d.OrderDetailNavigation).WithOne(p => p.OrderDetail)
                 .HasForeignKey<OrderDetail>(d => d.OrderDetailId)
@@ -77,14 +77,14 @@ public partial class SoftwareContext : DbContext
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.Property(e => e.ProductId).HasColumnName("ProductID");
+            entity.Property(e => e.ProductId).HasColumnName("ProductId");
             entity.Property(e => e.Name).IsUnicode(false);
             entity.Property(e => e.Price).HasColumnType("decimal(9, 2)");
         });
 
         modelBuilder.Entity<Status>(entity =>
         {
-            entity.Property(e => e.StatusId).HasColumnName("StatusID");
+            entity.Property(e => e.StatusId).HasColumnName("StatusId");
             entity.Property(e => e.StatusName).HasMaxLength(50);
         });
 

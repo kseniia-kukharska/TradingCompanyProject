@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+/*
 namespace TradingCompanyDalef.Concrete
 {
     internal class tradingCompanyContext
@@ -20,3 +20,4 @@ namespace TradingCompanyDalef.Concrete
         => optionsBuilder.UseSqlServer(__conntr);
     }
 }
+*/

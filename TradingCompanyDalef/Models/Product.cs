@@ -9,7 +9,7 @@ namespace TradingCompanyDalef.Models;
 public partial class Product
 {
     [Key]
-    [Column("ProductID")]
+    [Column("ProductId")]
     public int ProductId { get; set; }
 
     [Unicode(false)]

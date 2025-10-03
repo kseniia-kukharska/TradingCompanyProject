@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/*
 namespace TradingCompanyDalEf.Concrete
 {
     public class ProductDalEf : IProductDal
@@ -16,3 +17,4 @@ namespace TradingCompanyDalEf.Concrete
         }
     }
 }
+*/

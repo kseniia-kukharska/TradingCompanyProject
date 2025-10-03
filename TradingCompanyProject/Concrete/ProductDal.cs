@@ -14,12 +14,12 @@ namespace TradingCompanyDal.Concrete
             connection.Open();
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "INSERT INTO Products (Name, Price, Amount) OUTPUT inserted.ProductID VALUES (@name, @price, @amount)";
+            command.CommandText = "INSERT INTO Products (Name, Price, Amount) OUTPUT inserted.ProductId VALUES (@name, @price, @amount)";
             command.Parameters.AddWithValue("@name", product.Name);
             command.Parameters.AddWithValue("@price", product.Price);
             command.Parameters.AddWithValue("@amount", product.Amount);
 
-            product.ProductID = (int)command.ExecuteScalar();
+            product.ProductId = (int)command.ExecuteScalar();
             return product;
         }
 
@@ -37,7 +37,7 @@ namespace TradingCompanyDal.Concrete
             {
                 products.Add(new Product
                 {
-                    ProductID = (int)reader["ProductID"],
+                    ProductId = (int)reader["ProductId"],
                     Name = (string)reader["Name"],
                     Price = (decimal)reader["Price"],
                     Amount = (int)reader["Amount"]
@@ -46,21 +46,21 @@ namespace TradingCompanyDal.Concrete
             return products;
         }
 
-        public Product GetByID(int productID)
+        public Product GetById(int productId)
         {
             using SqlConnection connection = new SqlConnection(_connectionString);
             connection.Open();
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM Products WHERE ProductID = @id";
-            command.Parameters.AddWithValue("@id", productID);
+            command.CommandText = "SELECT * FROM Products WHERE ProductId = @id";
+            command.Parameters.AddWithValue("@id", productId);
 
             SqlDataReader reader = command.ExecuteReader();
             if (reader.Read())
             {
                 return new Product
                 {
-                    ProductID = (int)reader["ProductID"],
+                    ProductId = (int)reader["ProductId"],
                     Name = (string)reader["Name"],
                     Price = (decimal)reader["Price"],
                     Amount = (int)reader["Amount"]
@@ -75,24 +75,24 @@ namespace TradingCompanyDal.Concrete
             connection.Open();
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "UPDATE Products SET Name=@name, Price=@price, Amount=@amount WHERE ProductID=@id";
+            command.CommandText = "UPDATE Products SET Name=@name, Price=@price, Amount=@amount WHERE ProductId=@id";
             command.Parameters.AddWithValue("@name", product.Name);
             command.Parameters.AddWithValue("@price", product.Price);
             command.Parameters.AddWithValue("@amount", product.Amount);
-            command.Parameters.AddWithValue("@id", product.ProductID);
+            command.Parameters.AddWithValue("@id", product.ProductId);
 
             command.ExecuteNonQuery();
             return product;
         }
 
-        public bool Delete(int productID)
+        public bool Delete(int productId)
         {
             using SqlConnection connection = new SqlConnection(_connectionString);
             connection.Open();
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "DELETE FROM Products WHERE ProductID=@id";
-            command.Parameters.AddWithValue("@id", productID);
+            command.CommandText = "DELETE FROM Products WHERE ProductId=@id";
+            command.Parameters.AddWithValue("@id", productId);
 
             int rows = command.ExecuteNonQuery();
             return rows > 0;

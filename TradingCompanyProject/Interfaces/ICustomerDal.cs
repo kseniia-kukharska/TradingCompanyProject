@@ -11,8 +11,8 @@ namespace TradingCompanyDal.Interfaces
     {
         Customer Create(Customer customer);
         List<Customer> GetAll();
-        Customer GetByID(int customerID);
+        Customer GetById(int customerId);
         Customer Update(Customer customer);
-        bool Delete(int customerID);
+        bool Delete(int customerId);
     }
 }

@@ -6,9 +6,9 @@ namespace TradingCompanyDal.Interfaces
     {
         Product Create(Product product);
         List<Product> GetAll();
-        Product GetByID(int productID);
+        Product GetById(int productId);
         Product Update(Product product);
-        bool Delete(int productID);
+        bool Delete(int productId);
     }
      
 }

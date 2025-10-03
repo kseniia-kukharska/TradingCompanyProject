@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using TradingCompanyDalef.Models;
-
+/*
 namespace TradingCompanyDalef.Data;
 
 public partial class TradingCompanyContext : DbContext
@@ -60,3 +60,4 @@ public partial class TradingCompanyContext : DbContext
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
+*/

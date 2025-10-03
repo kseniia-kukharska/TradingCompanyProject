@@ -9,13 +9,13 @@ namespace TradingCompanyDalef.Models;
 public partial class Order
 {
     [Key]
-    [Column("OrderID")]
+    [Column("OrderId")]
     public int OrderId { get; set; }
 
-    [Column("CustomerID")]
+    [Column("CustomerId")]
     public int CustomerId { get; set; }
 
-    [Column("StatusID")]
+    [Column("StatusId")]
     public int StatusId { get; set; }
 
     [Column(TypeName = "decimal(9, 2)")]

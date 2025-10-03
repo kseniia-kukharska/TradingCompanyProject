@@ -15,12 +15,12 @@ namespace TradingCompanyDal.Concrete
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
-                command.CommandText = "INSERT INTO Customers (Name, Phone, BirthDate) OUTPUT inserted.CustomerID VALUES (@name, @phone, @birthDate)";
+                command.CommandText = "INSERT INTO Customers (Name, Phone, BirthDate) OUTPUT inserted.CustomerId VALUES (@name, @phone, @birthDate)";
                 command.Parameters.AddWithValue("@name", customer.Name);
                 command.Parameters.AddWithValue("@phone", customer.Phone);
                 command.Parameters.AddWithValue("@birthDate", customer.BirthDate);
 
-                customer.CustomerID = (int)command.ExecuteScalar();
+                customer.CustomerId = (int)command.ExecuteScalar();
                 return customer;
             }
 
@@ -38,7 +38,7 @@ namespace TradingCompanyDal.Concrete
                 {
                     customers.Add(new Customer
                     {
-                        CustomerID = (int)reader["CustomerID"],
+                        CustomerId = (int)reader["CustomerId"],
                         Name = (string)reader["Name"],
                         Phone = (string)reader["Phone"],
                         BirthDate = (DateTime)reader["BirthDate"]
@@ -47,21 +47,21 @@ namespace TradingCompanyDal.Concrete
                 return customers;
             }
 
-            public Customer GetByID(int customerID)
+            public Customer GetById(int customerId)
             {
                 using SqlConnection connection = new SqlConnection(_connectionString);
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
-                command.CommandText = "SELECT * FROM Customers WHERE CustomerID = @id";
-                command.Parameters.AddWithValue("@id", customerID);
+                command.CommandText = "SELECT * FROM Customers WHERE CustomerId = @id";
+                command.Parameters.AddWithValue("@id", customerId);
 
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
                 {
                     return new Customer
                     {
-                        CustomerID = (int)reader["CustomerID"],
+                        CustomerId = (int)reader["CustomerId"],
                         Name = (string)reader["Name"],
                         Phone = (string)reader["Phone"],
                         BirthDate = (DateTime)reader["BirthDate"]
@@ -76,24 +76,24 @@ namespace TradingCompanyDal.Concrete
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
-                command.CommandText = "UPDATE Customers SET Name=@name, Phone=@phone, BirthDate=@birthDate WHERE CustomerID=@id";
+                command.CommandText = "UPDATE Customers SET Name=@name, Phone=@phone, BirthDate=@birthDate WHERE CustomerId=@id";
                 command.Parameters.AddWithValue("@name", customer.Name);
                 command.Parameters.AddWithValue("@phone", customer.Phone);
                 command.Parameters.AddWithValue("@birthDate", customer.BirthDate);
-                command.Parameters.AddWithValue("@id", customer.CustomerID);
+                command.Parameters.AddWithValue("@id", customer.CustomerId);
 
                 command.ExecuteNonQuery();
                 return customer;
             }
 
-            public bool Delete(int customerID)
+            public bool Delete(int customerId)
             {
                 using SqlConnection connection = new SqlConnection(_connectionString);
                 connection.Open();
 
                 SqlCommand command = connection.CreateCommand();
-                command.CommandText = "DELETE FROM Customers WHERE CustomerID=@id";
-                command.Parameters.AddWithValue("@id", customerID);
+                command.CommandText = "DELETE FROM Customers WHERE CustomerId=@id";
+                command.Parameters.AddWithValue("@id", customerId);
 
                 int rows = command.ExecuteNonQuery();
                 return rows > 0;
