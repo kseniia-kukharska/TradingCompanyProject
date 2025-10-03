@@ -1,185 +1,256 @@
-﻿using Microsoft.Data.SqlClient;
-
-
-namespace TradingCompanyConsole
+﻿namespace TradingCompany2025.Console
 {
-    class Program
+    using TradingCompanyDal.Concrete;
+    using TradingCompanyDto;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    internal class Program
     {
         static void Main(string[] args)
         {
-            ProductDal productDal = new ProductDal();
-            CustomerDal customerDal = new CustomerDal();
-            OrderDal orderDal = new OrderDal();
+            Console.WriteLine("Welcome to Trading Company Product Management!");
+            char c = 's'; 
 
-            bool exit = false;
-
-            while (!exit)
+            while (c != '0')
             {
-                Console.Clear();
-                Console.WriteLine("=== Main Menu ===");
-                Console.WriteLine("1. Manage Products");
-                Console.WriteLine("2. Manage Customers");
-                Console.WriteLine("3. Manage Orders");
-                Console.WriteLine("0. Exit");
-                Console.Write("Select an option: ");
-                string mainChoice = Console.ReadLine();
-
-                switch (mainChoice)
+                switch (c)
                 {
-                    case "1":
-                        EntityMenu("Product", productDal);
+                    case '1':
+                       
+                        GetAllProducts();
                         break;
-                    case "2":
-                        EntityMenu("Customer", customerDal);
+                    case '2':
+                       
+                        InsertProduct();
                         break;
-                    case "3":
-                        EntityMenu("Order", orderDal);
+                    case '3':
+                       
+                        GetProductById();
                         break;
-                    case "0":
-                        exit = true;
+                    case '4':
+                       
+                        UpdateProduct();
+                        break;
+                    case '5':
+                       
+                        DeleteProduct();
+                        break;
+                    case '0':
+                        Console.WriteLine("Goodbye!");
                         break;
                     default:
-                        Console.WriteLine("Invalid option. Try again.");
-                        break;
-                }
-
-                if (!exit)
-                {
-                    Console.WriteLine("\nPress any key to return to main menu...");
-                    Console.ReadKey();
-                }
-            }
-        }
-
-        static void EntityMenu<T>(string entityName, IEntityDal<T> dal)
-        {
-            bool back = false;
-
-            while (!back)
-            {
-                Console.Clear();
-                Console.WriteLine($"=== {entityName} Menu ===");
-                Console.WriteLine("1. Create");
-                Console.WriteLine("2. Get All");
-                Console.WriteLine("3. Get By ID");
-                Console.WriteLine("4. Update");
-                Console.WriteLine("5. Delete");
-                Console.WriteLine("0. Back");
-                Console.Write("Select an option: ");
-
-                string choice = Console.ReadLine();
-
-                switch (choice)
-                {
-                    case "1":
-                        dal.Create(EnterEntity<T>());
-                        Console.WriteLine($"{entityName} created!");
-                        break;
-                    case "2":
-                        List<T> all = dal.GetAll();
-                        foreach (var item in all)
-                            Console.WriteLine(item);
-                        break;
-                    case "3":
-                        Console.Write("Enter ID: ");
-                        int id = int.Parse(Console.ReadLine());
-                        var entity = dal.GetByID(id);
-                         //Console.WriteLine(entity ?? $"{entityName} not found.");
-                        break;
-                    case "4":
-                        Console.Write("Enter ID to update: ");
-                        int updateId = int.Parse(Console.ReadLine());
-                        T entityToUpdate = dal.GetByID(updateId);
-                        if (entityToUpdate != null)
+                        if (c != 's')
                         {
-                            dal.Update(EnterEntity<T>());
-                            Console.WriteLine($"{entityName} updated!");
-                        }
-                        else
-                        {
-                            Console.WriteLine($"{entityName} not found.");
+                            Console.WriteLine("Invalid choice. Please try again.");
                         }
                         break;
-                    case "5":
-                        Console.Write("Enter ID to delete: ");
-                        int deleteId = int.Parse(Console.ReadLine());
-                        bool deleted = dal.Delete(deleteId);
-                        Console.WriteLine(deleted ? $"{entityName} deleted!" : $"{entityName} not found.");
-                        break;
-                    case "0":
-                        back = true;
-                        break;
-                    default:
-                        Console.WriteLine("Invalid option. Try again.");
-                        break;
                 }
 
-                if (!back)
-                {
-                    Console.WriteLine("\nPress any key to continue...");
-                    Console.ReadKey();
-                }
+                //Console.WriteLine("\n---");
+                Console.WriteLine("Choose option:\n1. Get all Products;");
+                Console.WriteLine("2. Insert a Product;");
+                Console.WriteLine("3. Get a Product by ID;");
+                Console.WriteLine("4. Update a Product;");
+                Console.WriteLine("5. Delete a Product;");
+                Console.WriteLine("0. Quit.");
+                Console.Write("Your choice: ");
+
+               
+                string input = Console.ReadLine();
+                c = input.Length > 0 ? input[0] : ' ';
             }
         }
 
-        // This is a placeholder method for entering entity data
-        static T EnterEntity<T>()
+        private static void PrintProduct(Product product)
         {
-            if (typeof(T) == typeof(Product))
+            if (product != null)
             {
-                Console.Write("Name: ");
+                Console.WriteLine($"\tID: {product.ProductID}, Name: {product.Name}, Price: {product.Price}, Amount: {product.Amount}");
+            }
+            else
+            {
+                Console.WriteLine("\tProduct not found.");
+            }
+        }
+
+        private static void GetAllProducts()
+        {
+            try
+            {
+                var dal = new ProductDal();
+                var products = dal.GetAll();
+
+                if (products.Any())
+                {
+                    Console.WriteLine($"Found {products.Count} products:");
+                    foreach (var product in products)
+                    {
+                        PrintProduct(product);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No products found in the database.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred while retrieving products: {ex.Message}");
+            }
+        }
+
+        private static void InsertProduct()
+        {
+            try
+            {
+                
+                Console.Write("Enter product Name: ");
                 string name = Console.ReadLine();
-                Console.Write("Price: ");
-                decimal price = decimal.Parse(Console.ReadLine());
-                Console.Write("Quantity: ");
-                int qty = int.Parse(Console.ReadLine());
 
-                return (T)(object)new Product { Name = name, Price = price, Quantity = qty };
+                Console.Write("Enter product Price: ");
+   
+                if (!decimal.TryParse(Console.ReadLine(), out decimal price))
+                {
+                    Console.WriteLine("Invalid price format. Insertion cancelled.");
+                    return;
+                }
+
+                Console.Write("Enter product Amount: ");
+                
+                if (!int.TryParse(Console.ReadLine(), out int amount))
+                {
+                    Console.WriteLine("Invalid amount format. Insertion cancelled.");
+                    return;
+                }
+
+                var dal = new ProductDal();
+
+                var newProduct = new Product
+                {
+                    Name = name,
+                    Price = price,
+                    Amount = amount
+                };
+
+                var createdProduct = dal.Create(newProduct);
+
+                Console.Write("Successfully Inserted Product: ");
+                PrintProduct(createdProduct);
             }
-
-            if (typeof(T) == typeof(Customer))
+            catch (Exception ex)
             {
-                Console.Write("Name: ");
-                string name = Console.ReadLine();
-                Console.Write("Email: ");
-                string email = Console.ReadLine();
-
-                return (T)(object)new Customer { Name = name, Email = email };
+                Console.WriteLine($"An error occurred while inserting product: {ex.Message}");
             }
+        }
 
-            if (typeof(T) == typeof(Order))
+        private static void GetProductById()
+        {
+            try
             {
-                Console.Write("Product ID: ");
-                int productId = int.Parse(Console.ReadLine());
-                Console.Write("Customer ID: ");
-                int customerId = int.Parse(Console.ReadLine());
-                Console.Write("Quantity: ");
-                int qty = int.Parse(Console.ReadLine());
+                Console.Write("Enter Product ID: ");
+                if (!int.TryParse(Console.ReadLine(), out int id))
+                {
+                    Console.WriteLine("Invalid ID format.");
+                    return;
+                }
 
-                return (T)(object)new Order { ProductID = productId, CustomerID = customerId, Quantity = qty };
+                var dal = new ProductDal();
+                var product = dal.GetByID(id);
+
+                Console.Write($"Product with ID {id}: ");
+                PrintProduct(product);
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred while retrieving product: {ex.Message}");
+            }
+        }
 
-            return default(T);
+        private static void UpdateProduct()
+        {
+            try
+            {
+                Console.Write("Enter Product ID: ");
+                if (!int.TryParse(Console.ReadLine(), out int id))
+                {
+                    Console.WriteLine("Invalid ID format. Update cancelled.");
+                    return;
+                }
+
+                var dal = new ProductDal();
+                var existingProduct = dal.GetByID(id);
+
+                if (existingProduct == null)
+                {
+                    Console.WriteLine($"Product with ID {id} not found.");
+                    return;
+                }
+
+                Console.WriteLine("Current Product Details:");
+                PrintProduct(existingProduct);
+                Console.WriteLine("Enter new values (leave empty to keep current value):");
+
+                Console.Write($"Enter new Name ({existingProduct.Name}): ");
+                string newName = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(newName))
+                {
+                    existingProduct.Name = newName;
+                }
+
+         
+                Console.Write($"Enter new Price ({existingProduct.Price}): ");
+                string newPriceStr = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(newPriceStr) && decimal.TryParse(newPriceStr, out decimal newPrice))
+                {
+                    existingProduct.Price = newPrice;
+                }
+
+                Console.Write($"Enter new Amount ({existingProduct.Amount}): ");
+                string newAmountStr = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(newAmountStr) && int.TryParse(newAmountStr, out int newAmount))
+                {
+                    existingProduct.Amount = newAmount;
+                }
+
+                var updatedProduct = dal.Update(existingProduct);
+                Console.Write("Successfully Updated Product: ");
+                PrintProduct(updatedProduct);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred while updating product: {ex.Message}");
+            }
+        }
+
+        private static void DeleteProduct()
+        {
+            try
+            {
+                Console.Write("Enter Product ID: ");
+                if (!int.TryParse(Console.ReadLine(), out int id))
+                {
+                    Console.WriteLine("Invalid ID format. Deletion cancelled.");
+                    return;
+                }
+
+                var dal = new ProductDal();
+                bool success = dal.Delete(id);
+
+                if (success)
+                {
+                    Console.WriteLine($"Successfully deleted Product with ID {id}.");
+                }
+                else
+                {
+                    Console.WriteLine($"Product with ID {id} not found or could not be deleted.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred while deleting product: {ex.Message}");
+            }
         }
     }
-
-    // Entities
-    public class Product { public int ProductID; public string Name; public decimal Price; public int Quantity; public override string ToString() => $"{ProductID}: {Name}, {Price}, {Quantity}"; }
-    public class Customer { public int CustomerID; public string Name; public string Email; public override string ToString() => $"{CustomerID}: {Name}, {Email}"; }
-    public class Order { public int OrderID; public int ProductID; public int CustomerID; public int Quantity; public override string ToString() => $"{OrderID}: Product {ProductID}, Customer {CustomerID}, Qty {Quantity}"; }
-
-    // DAL Interfaces
-    public interface IEntityDal<T>
-    {
-        T Create(T entity);
-        List<T> GetAll();
-        T GetByID(int id);
-        T Update(T entity);
-        bool Delete(int id);
-    }
-
-    // Example DAL classes (placeholders)
-    public class ProductDal : IEntityDal<Product> { public Product Create(Product entity) => entity; public List<Product> GetAll() => new List<Product>(); public Product GetByID(int id) => null; public Product Update(Product entity) => entity; public bool Delete(int id) => true; }
-    public class CustomerDal : IEntityDal<Customer> { public Customer Create(Customer entity) => entity; public List<Customer> GetAll() => new List<Customer>(); public Customer GetByID(int id) => null; public Customer Update(Customer entity) => entity; public bool Delete(int id) => true; }
-    public class OrderDal : IEntityDal<Order> { public Order Create(Order entity) => entity; public List<Order> GetAll() => new List<Order>(); public Order GetByID(int id) => null; public Order Update(Order entity) => entity; public bool Delete(int id) => true; }
 }
