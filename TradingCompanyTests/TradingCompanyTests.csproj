@@ -18,11 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TradingCompanyConsole\TradingCompanyConsole.csproj" />
-    <ProjectReference Include="..\TradingCompanyProject\TradingCompanyDal.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Using Include="NUnit.Framework" />
   </ItemGroup>
 
